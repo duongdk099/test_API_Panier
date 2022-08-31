@@ -99,7 +99,7 @@ app.post("/login", (req, resp) => {
   connection.query(sql, function (err, res) {
     if (err) throw err;
     if (res.length >= 1) {
-      resp.send("login oke");
+      resp.send("login success");
     } else {
       resp.send("wrong password ");
     }
@@ -118,7 +118,7 @@ app.post("/add_item", (req, resp) => {
       resp.send("existed");
     } else {
       const sql = `insert  into item(item_name,item_price) values('${body.item_name}','${body.item_price}') `;
-      connection.query(sql, function (err, res) {
+      connection.query(sql, function (err) {
         if (err) throw err;
         resp.send("create");
       });
@@ -159,12 +159,10 @@ app.post("/create_cart", (req, resp) => {
         if (err) throw err;
         resp.send("created OKE");
       });
-      // resp.send("found");
     } else {
       resp.send("not found user");
     }
   });
-  // resp.send(body.user_id);
 });
 
 /**
